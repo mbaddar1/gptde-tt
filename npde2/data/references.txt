@@ -1,0 +1,35 @@
+
+"""
+Script to Generate Time-Varying Dynamics
+"""
+
+"""Backlog"""
+"""
+I) Linear TV DE
+http://faculty.sist.shanghaitech.edu.cn/faculty/boris/downloads/EE550/lecture4.pdf
+
+II)
+https://math.libretexts.org/Courses/Mount_Royal_University/MATH_2200%3A_Calculus_for_Scientists_II/3%3A_Introduction_to_Differential_Equations/3.6%3A_First_Order_Equations%3A_Transformation_of_Nonlinear_Equations_into_Separable_Equations
+https://www.cfm.brown.edu/people/dobrush/am33/Mathematica/ch2/bernoulli.html
+"""
+"""
+Non Linear Oscillators
+https://sprott.physics.wisc.edu/pubs/paper492.pdf
+"""
+"""
+Non-autonomoous systems
+Autonomous and non-autonomous first order differential equations and systems ,
+vector fields and direction fields (sections 1.1, 7.1)
+https://www.math.tamu.edu/~zelenko/308_w3_qual.pdf
+"""
+"""
+Non autonmous van der pol (Forced oscillating)
+https://link.springer.com/content/pdf/10.1007/s40435-013-0010-4.pdf
+http://math.colgate.edu/~wweckesser/pubs/FVDPI.pdf
+https://arxiv.org/pdf/0803.1658.pdf
+https://inis.iaea.org/collection/NCLCollectionStore/_Public/31/060/31060710.pdf
+http://www.scholarpedia.org/article/Van_der_Pol_oscillator#Periodic_Forcing_and_Deterministic_Chaos
+https://www.mathworks.com/matlabcentral/answers/452772-solve-and-plot-the-phase-portrait-for-van-der-pol-ode-with-time-dependent-term
+https://www.hindawi.com/journals/apec/2016/3426713/#EEq1
+"""
+

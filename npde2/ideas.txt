@@ -1,0 +1,21 @@
+This file contains ideas based on code understanding
+
+===========================================================
+1) TT representation for inducing points
+ref:
+npde_helper2.py : line 27
+"W: Integer denoting the width of the inducing point grid. If the problem
+            dimension is D, total number of inducing points is W**D"
+
+2) Kernel type => temporal evolving spatial kernels focusing on image processing
+ref:
+npde_helper2.py : line 29
+"ktype: Kernel type. We have made experiments only with Kronecker kernel,
+            denoted by 'id'. The other kernels are not supported."
+
+3) optimization based on variational Bayes not only whitened U (inducing point functions : U = f(Z) )
+ref:
+npde_helper2.py : line 31
+"whiten: Boolean. Currently we perform the optimization only in the
+            white domain"
+
