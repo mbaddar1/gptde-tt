@@ -1,0 +1,1 @@
+npde_helper2.py : understand the inducing points grid building
