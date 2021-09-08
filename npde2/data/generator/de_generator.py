@@ -12,12 +12,12 @@ iii) Time-delay
 from abc import abstractmethod, ABC
 
 
-class DataGenerator(ABC):
-    def __init__(self, parameters):
-        self.parameters = parameters
+class DiffEqDataGen(ABC):
+    def __init__(self, model):
+        self.model = model
 
     @abstractmethod
-    def generate(self, N: int, model: str):
+    def generate(self, N: int):
         """
 
         @param N: int, sample size

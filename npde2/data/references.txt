@@ -33,3 +33,18 @@ https://www.mathworks.com/matlabcentral/answers/452772-solve-and-plot-the-phase-
 https://www.hindawi.com/journals/apec/2016/3426713/#EEq1
 """
 
+"""
+ODE Solvers
+Refs
+Theory
+https://en.wikipedia.org/wiki/Euler%E2%80%93Maruyama_method
+https://en.wikipedia.org/wiki/Euler_method
+https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods
+https://en.wikipedia.org/wiki/List_of_Runge%E2%80%93Kutta_methods
+
+Python
+https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.odeint.html
+"""
+
+"NonLinear Non Autonomous DDEs"
+https://www.sciencedirect.com/science/article/pii/S0307904X08001595
