@@ -11,6 +11,7 @@ import logging
 import typing
 
 import numpy as np
+import scipy.stats
 from scipy.integrate import solve_ivp
 
 from npde2.data.generator.de_generator import DiffEqDataGen
@@ -26,9 +27,8 @@ class NLTVODE(DiffEqDataGen):
 
     def generate(self, N: int, **kwargs) -> typing.Tuple:
         if self.model == 'vdp-forced':  # vdp forced
-            soln = NLTVODE.__vdp_forced_generate(N=N, t_span=kwargs['t_span'], y0=kwargs['y0'], mio=kwargs['mio'],
-                                                 omega=kwargs['omega'], a=kwargs['a'])
-            return soln
+            return NLTVODE.__vdp_forced_generate(N=N, t_span=kwargs['t_span'], y0=kwargs['y0'], mio=kwargs['mio'],
+                                                 omega=kwargs['omega'], a=kwargs['a'],nstd=kwargs['nstd'])
         else:
             raise ValueError(f'Model {self.model} is not supported!')
 
@@ -36,10 +36,12 @@ class NLTVODE(DiffEqDataGen):
         pass
 
     @staticmethod
-    def __vdp_forced_generate(N, t_span, y0, mio, omega, a):
+    def __vdp_forced_generate(N, t_span, y0, mio, omega, a, nstd):
         t_eval = np.linspace(start=t_span[0], stop=t_span[1], num=N)
         soln = solve_ivp(fun=NLTVODE.__vdp_forced_func, t_span=t_span, y0=y0, t_eval=t_eval, args=(mio, omega, a))
-        return soln
+        y = soln.y
+        y += scipy.stats.norm.rvs() * nstd
+        return y
 
     @staticmethod
     def __vdp_forced_func(t, y, mio, omega, a):

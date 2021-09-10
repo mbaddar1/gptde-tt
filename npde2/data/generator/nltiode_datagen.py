@@ -5,6 +5,7 @@ import logging
 import typing
 
 import numpy as np
+import scipy.stats
 from scipy.integrate import solve_ivp
 
 from npde2.data.generator.de_generator import DiffEqDataGen
@@ -14,7 +15,7 @@ class NLTIODE(DiffEqDataGen):
     def __init__(self, model):
         super(NLTIODE, self).__init__(model)
 
-    def generate(self, N: int, **kwargs) -> typing.Tuple:
+    def generate(self, N: int, **kwargs):
         """
 
         @param model: str : model type to generate the data
@@ -29,7 +30,8 @@ class NLTIODE(DiffEqDataGen):
                 for ex. current implementation for VDP is for 2-dim case
         """
         if self.model == 'vdp':
-            soln = NLTIODE.__vdp_generate(N=N, t_span=kwargs['t_span'], y0=kwargs['y0'], mio=kwargs['mio'])
+            soln = NLTIODE.__vdp_generate(N=N, t_span=kwargs['t_span'], y0=kwargs['y0'], mio=kwargs['mio'],
+                                          nstd=kwargs['nstd'])
             return soln
         else:
             raise ValueError(f"model {self.model} is not supported for data generation")
@@ -51,22 +53,12 @@ class NLTIODE(DiffEqDataGen):
         return y_dot
 
     @staticmethod
-    def __vdp_generate(N, t_span, y0, mio) -> typing.Tuple:
-
-        """
-        Generate multiple-series dataset following the model for VDP oscillator
-        @param Ny: list[int] list of integers , each for the length of each series
-        @param x0: list[numpy-array] : list of d-dimensional array, each of which represent the initial condition
-            for each series
-        @param t_end: float : float representing the value of the time-end for the series
-        @return: list[numpy.array] : list of numpy array, each of which of dimension d, represents a separate series
-        """
-        # t_span = (0, 8)
-        t_eval = np.linspace(start=t_span[0], stop=t_span[1], num=10)
-        # y0 = np.array([0.2, 0.4])
-        # mio = 1
+    def __vdp_generate(N, t_span, y0, mio, nstd) :
+        t_eval = np.linspace(start=t_span[0], stop=t_span[1], num=N)
         soln = solve_ivp(fun=NLTIODE.__vdp_func, t_span=t_span, t_eval=t_eval, y0=y0, args=(mio,))
-        return soln
+        y = soln.y
+        y += scipy.stats.norm.rvs(size=y.shape) * nstd
+        return y
 
     def plot(self):
         pass
@@ -76,6 +68,6 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger('NLTIODE-Main')
     nltiode = NLTIODE(model='vdp')
-    kwargs = {'t_span': (0, 8), 'y0': [0.2, 0.4], 'mio': 8.53}
+    kwargs = {'t_span': (0, 8), 'y0': [0.2, 0.4], 'mio': 8.53, 'nstd': 0.1}
     soln = nltiode.generate(N=10, **kwargs)
     logger.info(f'Soln = \n{soln}')

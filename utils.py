@@ -5,6 +5,7 @@ import numpy as np
 import scipy.stats as ss
 # import tensorflow as tf
 import tensorflow.compat.v1 as tf
+
 tf.disable_v2_behavior()
 
 from matplotlib import rc
@@ -13,6 +14,7 @@ from matplotlib.gridspec import GridSpec
 float_type = tf.float64
 FIG_DIR = './npde2/figures'
 FIG_IDX = 1
+
 
 def vdp(x, t=0):
     dx = np.asarray([x[1],
@@ -27,7 +29,6 @@ def g(x, t, mean_, var_, sigvar_, const_):
 
 
 def gen_data(model='vdp', Ny=[30], tend=8, x0=np.asarray([2.0, -3.0]), nstd=0.1):
-
     x0in = x0
     Nt = len(Ny)
     x0 = np.zeros((Nt, 2))
@@ -237,4 +238,4 @@ def plot_data(t, Y, f, gtrue):
 
     plt.tight_layout()
     # plt.show()
-    fig.savefig(os.path.join(FIG_DIR,f'Figure {FIG_IDX}_generated_vdp_data_plot.png'))
+    fig.savefig(os.path.join(FIG_DIR, f'Figure {FIG_IDX}_generated_vdp_data_plot.png'))
